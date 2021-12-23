@@ -1,7 +1,7 @@
-package com.example.familiarization.strategypattern;
+package com.example.patterns.strategy.ducksimulator;
 
-import com.example.familiarization.strategypattern.duckbehaviours.FlyWithRocketPowered;
-import com.example.familiarization.strategypattern.ducks.*;
+import com.example.patterns.strategy.ducksimulator.duckbehaviours.FlyWithRocketPowered;
+import com.example.patterns.strategy.ducksimulator.ducks.*;
 
 public class DuckSimulator {
     public static void main(String[] args) {

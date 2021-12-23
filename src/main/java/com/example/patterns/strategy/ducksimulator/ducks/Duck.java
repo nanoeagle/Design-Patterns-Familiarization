@@ -1,6 +1,6 @@
-package com.example.familiarization.strategypattern.ducks;
+package com.example.patterns.strategy.ducksimulator.ducks;
 
-import com.example.familiarization.strategypattern.duckbehaviours.*;
+import com.example.patterns.strategy.ducksimulator.duckbehaviours.*;
 
 public abstract class Duck {
     FlyBehavior flyBehavior;

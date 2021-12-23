@@ -1,4 +1,4 @@
-package com.example.familiarization.strategypattern.duckbehaviours;
+package com.example.patterns.strategy.ducksimulator.duckbehaviours;
 
 public class FlyWithRocketPowered implements FlyBehavior {
     public void fly() {
