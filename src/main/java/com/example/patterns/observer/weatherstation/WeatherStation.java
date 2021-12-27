@@ -11,7 +11,7 @@ public class WeatherStation {
 
     public static void main(String[] args) {
         WeatherStation weatherStation = new WeatherStation();
-        DisplayElement[] displays = weatherStation.createDisplays();
+        AbstractWeatherDisplay[] displays = weatherStation.createDisplays();
         float[][] measurementSets = {
             {80, 65, 30.4f}, {201, 70, 29.2f}, {-1, 90, 29.2f}};
         
@@ -21,19 +21,26 @@ public class WeatherStation {
             for (DisplayElement d : displays) d.display();
             System.out.println();
         }
+        
+        System.out.println("--- Unsubscribe the heatIndexDisplay " 
+            + "from its weatherData. ---");
+        displays[3].unsubscribeFromSubject();
+        System.out.println("--- Update new measurements. ---");
+        weatherStation.updateMeasurements(new float[] {15, 30, 34.2f});
+        displays[3].display();
     }
 
-    private DisplayElement[] createDisplays() {
-        DisplayElement environmentalConditions = 
+    private AbstractWeatherDisplay[] createDisplays() {
+        AbstractWeatherDisplay environmentalConditions = 
             new EnvironmentalConditionsDisplay(weatherData);
-        DisplayElement statistics = new StatisticsDisplay(weatherData);
-        DisplayElement forecast = new ForecastDisplay(weatherData);
-        DisplayElement heatIndex = new HeatIndexDisplay(weatherData);
-        return new DisplayElement[] {
+        AbstractWeatherDisplay statistics = new StatisticsDisplay(weatherData);
+        AbstractWeatherDisplay forecast = new ForecastDisplay(weatherData);
+        AbstractWeatherDisplay heatIndex = new HeatIndexDisplay(weatherData);
+        return new AbstractWeatherDisplay[] {
             environmentalConditions, statistics, forecast, heatIndex};
     }
 
-    private void updateMeasurements(float[] ms) {
+    private void updateMeasurements(float... ms) {
         weatherData.setMeasurements(ms[0], ms[1], ms[2]);
         weatherData.notifyObservers();
     }
