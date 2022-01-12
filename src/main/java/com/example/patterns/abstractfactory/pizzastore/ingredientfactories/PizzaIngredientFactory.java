@@ -8,10 +8,10 @@ import com.example.patterns.abstractfactory.pizzastore.ingredients.sauce.*;
 import com.example.patterns.abstractfactory.pizzastore.ingredients.veggies.*;
 
 public interface PizzaIngredientFactory {
-    public Dough createDough();
-    public Sauce createSauce();
-    public Cheese createCheese();
-    public Veggie[] createVeggies();
-    public Pepperoni createPepperoni();
-    public Clam createClams();
+    Dough createDough();
+    Sauce createSauce();
+    Cheese createCheese();
+    Veggie[] createVeggies();
+    Pepperoni createPepperoni();
+    Clam createClams();
 }
