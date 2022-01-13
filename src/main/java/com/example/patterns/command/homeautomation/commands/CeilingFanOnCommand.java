@@ -10,6 +10,12 @@ public class CeilingFanOnCommand extends CeilingFanCommand {
 
     @Override
     public void execute() {
-        ceilingFan.toHighLevel();
+        setPrevPowerLvl();
+        switch (prevPowerLvl) {
+            case OFF: ceilingFan.toLowLevel(); return;
+            case LOW: ceilingFan.toMediumLevel(); return;
+            case MEDIUM: ceilingFan.toHighLevel(); return;
+            case HIGH: ceilingFan.toLowLevel(); return;
+        }
     }
 }

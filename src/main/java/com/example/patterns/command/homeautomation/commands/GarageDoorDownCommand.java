@@ -12,4 +12,9 @@ public class GarageDoorDownCommand extends GarageDoorCommand {
 	public void execute() {
 		garageDoor.down();
 	}
+
+	@Override
+    public void undo() {
+        garageDoor.up();
+    }
 }

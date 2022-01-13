@@ -7,11 +7,13 @@ public class RemoteControl {
 
     private Command[] onCommands;
     private Command[] offCommands;
+    private Command lastInvokedCommand;
     
     public RemoteControl() {
         onCommands = new Command[NUM_OF_SLOTS];
         offCommands = new Command[NUM_OF_SLOTS];
         Command noCommand = new NoCommand();
+        lastInvokedCommand = noCommand;
         for (int i = 0; i < NUM_OF_SLOTS; i++) {
             onCommands[i] = noCommand;
             offCommands[i] = noCommand;
@@ -25,10 +27,16 @@ public class RemoteControl {
     
     public void pressOnButtonAt(int slot) {
         onCommands[slot].execute();
+        lastInvokedCommand = onCommands[slot];
     }
     
     public void pressOffButtonAt(int slot) {
         offCommands[slot].execute();
+        lastInvokedCommand = offCommands[slot];
+    }
+
+    public void pressUndoButton() {
+        lastInvokedCommand.undo();
     }
     
     @Override
@@ -38,6 +46,8 @@ public class RemoteControl {
             info += "[slot " + i + "] " 
                 + onCommands[i].getClass().getSimpleName() + " " 
                 + offCommands[i].getClass().getSimpleName() + "\n";
+        info += "Last invoked command: " 
+            + lastInvokedCommand.getClass().getSimpleName() + "\n";
         return info;
     }
 }

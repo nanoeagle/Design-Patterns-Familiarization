@@ -19,23 +19,39 @@ public class HomeAutomationDemo {
             demo.setCommandsForRemoteControl(commands);
             System.out.println(demo.remoteControl);
             demo.pressButtonsOnRemoteControl();
+
+            demo.remoteControl.pressOnButtonAt(2);
+            demo.remoteControl.pressOnButtonAt(2);
+            demo.remoteControl.pressOnButtonAt(2);
+            demo.remoteControl.pressOnButtonAt(2);
+            demo.remoteControl.pressUndoButton();
+            demo.remoteControl.pressUndoButton();
+            demo.remoteControl.pressOffButtonAt(2);
+            demo.remoteControl.pressUndoButton();
+            demo.remoteControl.pressOnButtonAt(2);
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
 
     private List<Command> createCommands() throws RuntimeException {
+        Light livingRoomLight = new Light("Living room");
+        Light kitchenLight = new Light("Kitchen");
+        CeilingFan livingRoomCeilingFan = new CeilingFan("Living room");
+        GarageDoor garageDoor = new GarageDoor("Garage");
+        // Stereo livingRoomStereo = new Stereo("Living room");
+        
         List<Command> commands = new ArrayList<>();
-        commands.add(new LightOnCommand(new Light("Living room")));
-        commands.add(new LightOffCommand(new Light("Living room")));
-        commands.add(new LightOnCommand(new Light("Kitchen")));
-        commands.add(new LightOffCommand(new Light("Kitchen")));
-        commands.add(new CeilingFanOnCommand(new CeilingFan("Living room")));
-        commands.add(new CeilingFanOffCommand(new CeilingFan("Living room")));
-        commands.add(new GarageDoorUpCommand(new GarageDoor("Garage")));
-        commands.add(new GarageDoorDownCommand(new GarageDoor("Garage")));
-        commands.add(new StereoOnWithCDCommand(new Stereo("Living Room")));
-        commands.add(new StereoOffCommand(new Stereo("Living Room")));
+        commands.add(new LightOnCommand(livingRoomLight));
+        commands.add(new LightOffCommand(livingRoomLight));
+        commands.add(new LightOnCommand(kitchenLight));
+        commands.add(new LightOffCommand(kitchenLight));
+        commands.add(new CeilingFanOnCommand(livingRoomCeilingFan));
+        commands.add(new CeilingFanOffCommand(livingRoomCeilingFan));
+        commands.add(new GarageDoorUpCommand(garageDoor));
+        commands.add(new GarageDoorDownCommand(garageDoor));
+        // commands.add(new StereoOnWithCDCommand(livingRoomStereo));
+        // commands.add(new StereoOffCommand(livingRoomStereo));
         return commands;
     }
 

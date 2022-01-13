@@ -10,6 +10,7 @@ public class CeilingFanOffCommand extends CeilingFanCommand {
 
     @Override
     public void execute() {
+        setPrevPowerLvl();
         ceilingFan.off();
     }
 }
