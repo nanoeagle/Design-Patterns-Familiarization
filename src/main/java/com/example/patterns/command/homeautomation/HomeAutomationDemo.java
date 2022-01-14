@@ -20,15 +20,19 @@ public class HomeAutomationDemo {
             System.out.println(demo.remoteControl);
             demo.pressButtonsOnRemoteControl();
 
+            System.out.println("\n------ Undo button -------");
             demo.remoteControl.pressOnButtonAt(2);
             demo.remoteControl.pressOnButtonAt(2);
             demo.remoteControl.pressOnButtonAt(2);
             demo.remoteControl.pressOnButtonAt(2);
             demo.remoteControl.pressUndoButton();
+
+            System.out.println("\n------ Party Macro On -------");
+            demo.remoteControl.pressOnButtonAt(4);
+            System.out.println("\n------ Party Macro Off -------");
+            demo.remoteControl.pressOffButtonAt(4);
+            System.out.println("\n------ Undo Party Macro -------");
             demo.remoteControl.pressUndoButton();
-            demo.remoteControl.pressOffButtonAt(2);
-            demo.remoteControl.pressUndoButton();
-            demo.remoteControl.pressOnButtonAt(2);
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
@@ -39,19 +43,29 @@ public class HomeAutomationDemo {
         Light kitchenLight = new Light("Kitchen");
         CeilingFan livingRoomCeilingFan = new CeilingFan("Living room");
         GarageDoor garageDoor = new GarageDoor("Garage");
-        // Stereo livingRoomStereo = new Stereo("Living room");
         
+        Command livingRoomLightOn = new LightOnCommand(livingRoomLight);
+        Command livingRoomLightOff = new LightOffCommand(livingRoomLight);
+        Command livingRoomCeilingFanOn = new CeilingFanOnCommand(livingRoomCeilingFan);
+        Command livingRoomCeilingFanOff = new CeilingFanOffCommand(livingRoomCeilingFan);
+        Command garageDoorUp = new GarageDoorUpCommand(garageDoor);
+        Command garageDoorDown = new GarageDoorDownCommand(garageDoor);
+        Command[] partyStartCommands = {livingRoomLightOn, 
+            livingRoomCeilingFanOn, garageDoorUp};
+        Command[] partyEndCommands = {livingRoomLightOff, 
+            livingRoomCeilingFanOff, garageDoorDown};
+
         List<Command> commands = new ArrayList<>();
-        commands.add(new LightOnCommand(livingRoomLight));
-        commands.add(new LightOffCommand(livingRoomLight));
+        commands.add(livingRoomLightOn);
+        commands.add(livingRoomLightOff);
         commands.add(new LightOnCommand(kitchenLight));
         commands.add(new LightOffCommand(kitchenLight));
-        commands.add(new CeilingFanOnCommand(livingRoomCeilingFan));
-        commands.add(new CeilingFanOffCommand(livingRoomCeilingFan));
-        commands.add(new GarageDoorUpCommand(garageDoor));
-        commands.add(new GarageDoorDownCommand(garageDoor));
-        // commands.add(new StereoOnWithCDCommand(livingRoomStereo));
-        // commands.add(new StereoOffCommand(livingRoomStereo));
+        commands.add(livingRoomCeilingFanOn);
+        commands.add(livingRoomCeilingFanOff);
+        commands.add(garageDoorUp);
+        commands.add(garageDoorDown);
+        commands.add(new MacroCommand(partyStartCommands));
+        commands.add(new MacroCommand(partyEndCommands));
         return commands;
     }
 
