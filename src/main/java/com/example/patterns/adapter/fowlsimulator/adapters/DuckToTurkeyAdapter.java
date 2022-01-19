@@ -2,8 +2,7 @@ package com.example.patterns.adapter.fowlsimulator.adapters;
 
 import java.util.Random;
 
-import com.example.patterns.adapter.fowlsimulator.fowl.Duck;
-import com.example.patterns.adapter.fowlsimulator.fowl.Turkey;
+import com.example.patterns.adapter.fowlsimulator.fowl.*;
 
 public class DuckToTurkeyAdapter implements Turkey {
     private Duck duck;

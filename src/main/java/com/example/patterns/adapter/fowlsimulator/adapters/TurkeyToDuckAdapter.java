@@ -1,9 +1,6 @@
 package com.example.patterns.adapter.fowlsimulator.adapters;
 
-import java.util.ArrayList;
-
-import com.example.patterns.adapter.fowlsimulator.fowl.Duck;
-import com.example.patterns.adapter.fowlsimulator.fowl.Turkey;
+import com.example.patterns.adapter.fowlsimulator.fowl.*;
 
 public class TurkeyToDuckAdapter implements Duck {
     private Turkey turkey;
