@@ -10,6 +10,6 @@ public class BeverageDemo {
 
         CaffeineBeverage coffee = new Coffee();
         System.out.println("\n...Making coffee...");
-        coffee.prepareRecipe();;
+        coffee.prepareRecipe();
     }
 }

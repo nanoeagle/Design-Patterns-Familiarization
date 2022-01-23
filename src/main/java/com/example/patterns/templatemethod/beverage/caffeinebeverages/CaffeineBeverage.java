@@ -30,7 +30,9 @@ public abstract class CaffeineBeverage {
     final String getUserInput(String message) {
         System.out.print(message);
         String answer = null;
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader in = new BufferedReader(
+            new InputStreamReader(System.in))) 
+        {
             answer = in.readLine();
         } catch (IOException e) {
             System.err.println(e);
