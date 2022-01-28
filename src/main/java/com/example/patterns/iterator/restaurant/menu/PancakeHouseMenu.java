@@ -2,9 +2,7 @@ package com.example.patterns.iterator.restaurant.menu;
 
 import java.util.*;
 
-import com.example.patterns.iterator.restaurant.iterators.*;
-
-public class PancakeHouseMenu implements AbstractMenu {
+public class PancakeHouseMenu implements BreakfastMenu {
     private List<MenuItem> items;
     
     public PancakeHouseMenu() {
@@ -30,7 +28,7 @@ public class PancakeHouseMenu implements AbstractMenu {
     }
 
     @Override
-    public MenuIterator iterator() {
-        return new PancakeHouseMenuIterator(items);
+    public Iterator<MenuItem> iterator() {
+        return items.iterator();
     }
 }

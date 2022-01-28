@@ -1,8 +1,10 @@
 package com.example.patterns.iterator.restaurant.iterators;
 
+import java.util.Iterator;
+
 import com.example.patterns.iterator.restaurant.menu.MenuItem;
 
-public class DinerMenuIterator implements LunchMenuIterator {
+public class DinerMenuIterator implements Iterator<MenuItem> {
     private MenuItem[] items;
     private int itemIndex;
     

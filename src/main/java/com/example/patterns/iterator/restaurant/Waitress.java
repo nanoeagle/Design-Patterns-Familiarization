@@ -2,7 +2,6 @@ package com.example.patterns.iterator.restaurant;
 
 import java.util.*;
 
-import com.example.patterns.iterator.restaurant.iterators.*;
 import com.example.patterns.iterator.restaurant.menu.*;
 
 public class Waitress {
@@ -13,37 +12,25 @@ public class Waitress {
     }
     
     public void printMenu() {
-        Set<MenuIterator> menuIterators = extractMenuIteratorsFromMenuSet();
-        System.out.println("MENU");
-        printMenuUsing(menuIterators);
-    }
-
-    private Set<MenuIterator> extractMenuIteratorsFromMenuSet() {
-        Set<MenuIterator> menuIterators = new HashSet<>();
-        for (AbstractMenu menu : menuSet) menuIterators.add(menu.iterator());
-        return menuIterators;
-    }
-
-    private void printMenuUsing(Set<MenuIterator> menuIterators) {
-        for (MenuIterator itr : menuIterators) {
-            printKindOfMenuBasedOn(itr);
-            printMenuItemsUsing(itr);
-            System.out.println();
+        System.out.print("MENU");
+        for (AbstractMenu menu : menuSet) {
+            printKindOf(menu);
+            printItemsIn(menu);
         }
     }
 
-    private void printKindOfMenuBasedOn(MenuIterator itr) {
-        if (itr instanceof BreakfastMenuIterator)
-            System.out.println("--- BREAKFAST ---");
-        else System.out.println("--- LUNCH ---");
+    private void printItemsIn(AbstractMenu menu) {
+        for (MenuItem item : menu) {
+            System.out.print(item.getName() + ", ");
+            System.out.print(item.getPrice() + " -- ");
+            System.out.println(item.getDescription());
+        }
     }
 
-    private void printMenuItemsUsing(MenuIterator itr) {
-        while (itr.hasNext()) {
-            MenuItem menuItem = itr.next();
-            System.out.print(menuItem.getName() + ", ");
-            System.out.print(menuItem.getPrice() + " -- ");
-            System.out.println(menuItem.getDescription());
-        }
+    private void printKindOf(AbstractMenu menu) {
+        if (menu instanceof BreakfastMenu)
+            System.out.println("\n--- BREAKFAST ---");
+        else if (menu instanceof LunchMenu) 
+            System.out.println("\n--- LUNCH ---");
     }
 }

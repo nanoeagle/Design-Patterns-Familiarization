@@ -1,9 +1,6 @@
 package com.example.patterns.iterator.restaurant.menu;
 
-import com.example.patterns.iterator.restaurant.iterators.MenuIterator;
-
-public interface AbstractMenu {
+public interface AbstractMenu extends Iterable<MenuItem> {
     void addItem(String name, String description, 
         boolean vegetarian, double price);
-    MenuIterator iterator();
 }

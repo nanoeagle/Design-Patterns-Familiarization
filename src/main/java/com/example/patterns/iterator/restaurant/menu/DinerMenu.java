@@ -1,8 +1,10 @@
 package com.example.patterns.iterator.restaurant.menu;
 
-import com.example.patterns.iterator.restaurant.iterators.*;
+import java.util.Iterator;
 
-public class DinerMenu implements AbstractMenu {
+import com.example.patterns.iterator.restaurant.iterators.DinerMenuIterator;
+
+public class DinerMenu implements LunchMenu {
     private static final int MAX_ITEMS = 6;
     private MenuItem[] items;
     private int itemIndex;
@@ -34,7 +36,7 @@ public class DinerMenu implements AbstractMenu {
     }
 
     @Override
-    public MenuIterator iterator() {
+    public Iterator<MenuItem> iterator() {
         return new DinerMenuIterator(items);
     }
 }
