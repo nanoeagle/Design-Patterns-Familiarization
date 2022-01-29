@@ -7,7 +7,7 @@ import com.example.patterns.iterator.restaurant.menu.*;
 public class RestaurantDemo {
     public static void main(String[] args) {
         Waitress waitress = new Waitress(
-            Set.of(new PancakeHouseMenu(), new DinerMenu()));
+            Set.of(new PancakeHouseMenu(), new DinerMenu(), new CafeMenu()));
         waitress.printMenu(); 
     }
 }

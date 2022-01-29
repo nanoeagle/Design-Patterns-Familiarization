@@ -12,11 +12,20 @@ public class Waitress {
     }
     
     public void printMenu() {
-        System.out.print("MENU");
+        System.out.print("\nMENU");
         for (AbstractMenu menu : menuSet) {
             printKindOf(menu);
             printItemsIn(menu);
         }
+        System.out.println();
+    }
+
+    private void printKindOf(AbstractMenu menu) {
+        String kind = null;
+        if (menu instanceof BreakfastMenu) kind = "\n--- BREAKFAST: ";
+        else if (menu instanceof LunchMenu) kind = "\n--- LUNCH: ";
+        else kind = "\n--- DINNER: ";
+        System.out.println(kind + menu.getClass().getSimpleName() + " ---");
     }
 
     private void printItemsIn(AbstractMenu menu) {
@@ -25,12 +34,5 @@ public class Waitress {
             System.out.print(item.getPrice() + " -- ");
             System.out.println(item.getDescription());
         }
-    }
-
-    private void printKindOf(AbstractMenu menu) {
-        if (menu instanceof BreakfastMenu)
-            System.out.println("\n--- BREAKFAST ---");
-        else if (menu instanceof LunchMenu) 
-            System.out.println("\n--- LUNCH ---");
     }
 }
