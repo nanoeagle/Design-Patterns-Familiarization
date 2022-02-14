@@ -7,12 +7,12 @@ public class GumballMachine extends UnicastRemoteObject
 implements RemoteGumballMachine {
     private static final long serialVersionUID = 1L;
 
-    private State soldOut;
-    private State noQuarter;
-    private State hasQuarter;
-    private State sold;
-    private State winner;
-    private State currentState;
+    GumballMachineState soldOut;
+    GumballMachineState noQuarter;
+    GumballMachineState hasQuarter;
+    GumballMachineState sold;
+    GumballMachineState winner;
+    private GumballMachineState currentState;
     private String location;
     private int availableGumballs;
 
@@ -39,28 +39,8 @@ implements RemoteGumballMachine {
         else currentState = noQuarter;
     }
 
-    State getSoldOut() {
-        return soldOut;
-    }
-
-    State getNoQuarter() {
-        return noQuarter;
-    }
-
-    State getHasQuarter() {
-        return hasQuarter;
-    }
-
-    State getSold() {
-        return sold;
-    }
-
-    State getWinner() {
-        return winner;
-    }
-
     @Override
-    public State getCurrentState() {
+    public GumballMachineState getCurrentState() {
         return currentState;
     }
 
@@ -74,7 +54,7 @@ implements RemoteGumballMachine {
         return availableGumballs;
     }
 
-    void setCurrentState(State currentState) {
+    void setCurrentState(GumballMachineState currentState) {
         this.currentState = currentState;
     }    
 

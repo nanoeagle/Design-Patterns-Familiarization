@@ -1,6 +1,6 @@
 package com.example.patterns.state.mightygumball.machine;
 
-class NoQuarter extends State {
+class NoQuarter extends GumballMachineState {
     NoQuarter(GumballMachine gumballMachine) {
         super(gumballMachine);
     }
@@ -8,7 +8,7 @@ class NoQuarter extends State {
     @Override
     void insertQuarter() {
         System.out.println("You inserted a quarter");
-        gumballMachine.setCurrentState(gumballMachine.getHasQuarter());
+        gumballMachine.setCurrentState(gumballMachine.hasQuarter);
     }
 
     @Override

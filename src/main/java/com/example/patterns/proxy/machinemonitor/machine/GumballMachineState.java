@@ -2,12 +2,12 @@ package com.example.patterns.proxy.machinemonitor.machine;
 
 import java.io.Serializable;
 
-public abstract class State implements Serializable {
+public abstract class GumballMachineState implements Serializable {
     private static final long serialVersionUID = 1L;
 
     transient GumballMachine gumballMachine;
 
-    State(GumballMachine gumballMachine) {
+    GumballMachineState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;
     }
 

@@ -1,6 +1,6 @@
 package com.example.patterns.proxy.machinemonitor.machine;
 
-class Sold extends State {
+class Sold extends GumballMachineState {
     private static final long serialVersionUID = 1L;
 
 	Sold(GumballMachine gumballMachine) {
@@ -30,12 +30,12 @@ class Sold extends State {
 
     void transitionCurrentStateOfGumballMachine() {
         if (gumballMachine.isOutOfGumballs()) doWhenOutOfGumballs();
-        else gumballMachine.setCurrentState(gumballMachine.getNoQuarter());
+        else gumballMachine.setCurrentState(gumballMachine.noQuarter);
     }
 
     void doWhenOutOfGumballs() {
         System.out.println("Oops, out of gumballs!");
-        gumballMachine.setCurrentState(gumballMachine.getSoldOut());
+        gumballMachine.setCurrentState(gumballMachine.soldOut);
     }
 
     @Override

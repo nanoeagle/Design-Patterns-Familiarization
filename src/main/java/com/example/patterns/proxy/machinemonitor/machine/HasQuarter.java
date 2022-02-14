@@ -2,7 +2,7 @@ package com.example.patterns.proxy.machinemonitor.machine;
 
 import java.util.Random;
 
-class HasQuarter extends State {
+class HasQuarter extends GumballMachineState {
     private static final long serialVersionUID = 1L;
 	private static final int NUMBER_OF_GUMBALLS_FOR_PRIZE = 1;
     private static final int WIN_RATE = 10;
@@ -23,15 +23,15 @@ class HasQuarter extends State {
     @Override
     void ejectQuarter() {
         System.out.println("Quarter returned");
-        gumballMachine.setCurrentState(gumballMachine.getNoQuarter());
+        gumballMachine.setCurrentState(gumballMachine.noQuarter);
     }
  
     @Override
     void turnCrank() {
         System.out.println("You turned...");
         if (gumballMachineHasEnoughGumballsForPrize() && hasWinner())
-            gumballMachine.setCurrentState(gumballMachine.getWinner());
-        else gumballMachine.setCurrentState(gumballMachine.getSold());
+            gumballMachine.setCurrentState(gumballMachine.winner);
+        else gumballMachine.setCurrentState(gumballMachine.sold);
     }
 
     private boolean gumballMachineHasEnoughGumballsForPrize() {

@@ -1,6 +1,6 @@
 package com.example.patterns.proxy.machinemonitor.machine;
 
-class NoQuarter extends State {
+class NoQuarter extends GumballMachineState {
     private static final long serialVersionUID = 1L;
 
 	NoQuarter(GumballMachine gumballMachine) {
@@ -10,7 +10,7 @@ class NoQuarter extends State {
     @Override
     void insertQuarter() {
         System.out.println("You inserted a quarter");
-        gumballMachine.setCurrentState(gumballMachine.getHasQuarter());
+        gumballMachine.setCurrentState(gumballMachine.hasQuarter);
     }
 
     @Override

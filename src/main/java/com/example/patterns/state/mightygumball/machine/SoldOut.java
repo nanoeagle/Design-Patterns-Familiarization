@@ -1,6 +1,6 @@
 package com.example.patterns.state.mightygumball.machine;
 
-class SoldOut extends State {
+class SoldOut extends GumballMachineState {
     SoldOut(GumballMachine gumballMachine) {
         super(gumballMachine);
     }
@@ -28,7 +28,7 @@ class SoldOut extends State {
     @Override
     void refillWith(int numberOfGumballs) {
         gumballMachine.incrementAvailableGumballsBy(numberOfGumballs);
-        gumballMachine.setCurrentState(gumballMachine.getNoQuarter());
+        gumballMachine.setCurrentState(gumballMachine.noQuarter);
     }
 
     @Override

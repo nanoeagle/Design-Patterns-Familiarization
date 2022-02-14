@@ -1,9 +1,9 @@
 package com.example.patterns.state.mightygumball.machine;
 
-abstract class State {
+abstract class GumballMachineState {
     GumballMachine gumballMachine;
 
-    State(GumballMachine gumballMachine) {
+    GumballMachineState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;
     }
 

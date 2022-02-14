@@ -13,7 +13,7 @@ public class MightyGumballDemo {
         MightyGumballDemo demo = new MightyGumballDemo(5);
         System.out.println(demo.gumballMachine);
 
-        demo.gumballMachine.turnCrank();;
+        demo.gumballMachine.turnCrank();
         for (int i = 0; i < 2; i++) demo.testBuyingGumball();
         
         demo.testQuarterRelatedActions();

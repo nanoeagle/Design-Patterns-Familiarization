@@ -1,12 +1,12 @@
 package com.example.patterns.state.mightygumball.machine;
 
 public class GumballMachine {
-    private State soldOut;
-    private State noQuarter;
-    private State hasQuarter;
-    private State sold;
-    private State winner;
-    private State currentState;
+    GumballMachineState soldOut;
+    GumballMachineState noQuarter;
+    GumballMachineState hasQuarter;
+    GumballMachineState sold;
+    GumballMachineState winner;
+    private GumballMachineState currentState;
     private int availableGumballs;
 
     public GumballMachine(int numberOfGumballs) {
@@ -30,31 +30,11 @@ public class GumballMachine {
         else currentState = noQuarter;
     }
 
-    State getSoldOut() {
-        return soldOut;
-    }
-
-    State getNoQuarter() {
-        return noQuarter;
-    }
-
-    State getHasQuarter() {
-        return hasQuarter;
-    }
-
-    State getSold() {
-        return sold;
-    }
-
-    State getWinner() {
-        return winner;
-    }
-
     public int getAvailableGumballs() {
         return availableGumballs;
     }
 
-    void setCurrentState(State currentState) {
+    void setCurrentState(GumballMachineState currentState) {
         this.currentState = currentState;
     }    
 

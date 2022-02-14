@@ -1,6 +1,6 @@
 package com.example.patterns.proxy.machinemonitor.machine;
 
-class SoldOut extends State {
+class SoldOut extends GumballMachineState {
     private static final long serialVersionUID = 1L;
 
 	SoldOut(GumballMachine gumballMachine) {
@@ -30,7 +30,7 @@ class SoldOut extends State {
     @Override
     void refillWith(int numberOfGumballs) {
         gumballMachine.incrementAvailableGumballsBy(numberOfGumballs);
-        gumballMachine.setCurrentState(gumballMachine.getNoQuarter());
+        gumballMachine.setCurrentState(gumballMachine.noQuarter);
     }
 
     @Override
