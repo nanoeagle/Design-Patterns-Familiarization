@@ -8,50 +8,60 @@ import javax.swing.*;
 public class ImageIconProxy implements Icon {
     public static final int DEFAULT_ICON_WIDTH = 800;
     public static final int DEFAULT_ICON_HEIGHT = 600;
-
-    private final URL imageURL;
+    
+    final URL imageURL;
+    ImageIconProxyState imageLoaded;
+    ImageIconProxyState imageNotLoaded;
+    ImageIconProxyState currentState;
+    
     private volatile ImageIcon imageIcon;
-    private boolean isRetrievingImageIcon;
  
-    public ImageIconProxy(URL imageURL) { this.imageURL = imageURL; }
+    public ImageIconProxy(URL imageURL) { 
+        this.imageURL = imageURL;
+        setInternalStates();
+    }
+    
+    private void setInternalStates() {
+        imageLoaded = new ImageLoaded(this);
+        imageNotLoaded = new ImageNotLoaded(this);
+        currentState = imageNotLoaded;
+    }
+
+    synchronized void setImageIcon(ImageIcon imageIcon) 
+    throws NullPointerException {
+        if (imageIcon == null) 
+            throw new NullPointerException("Image icon is null!");
+        this.imageIcon = imageIcon;
+    }
+
+    ImageIcon getImageIcon() {
+        return imageIcon;
+    }
+
+    int getImageIconWidth() {
+        return imageIcon.getIconWidth();
+    }
+
+    int getImageIconHeight() {
+        return imageIcon.getIconHeight();
+    }
+
+    void paintImageIcon(Component c, Graphics g, int x, int y) {
+        imageIcon.paintIcon(c, g, x, y);
+    }
 
     @Override
     public int getIconWidth() {
-        if (imageIcon != null) return imageIcon.getIconWidth();
-        return DEFAULT_ICON_WIDTH;
+        return currentState.getIconWidth();
     }
 
     @Override
     public int getIconHeight() {
-        if (imageIcon != null) return imageIcon.getIconHeight();
-        return DEFAULT_ICON_HEIGHT;
-    }
-
-    public synchronized void setImageIcon(ImageIcon imageIcon) {
-        this.imageIcon = imageIcon;
+        return currentState.getIconHeight();
     }
     
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        if (imageIcon != null) imageIcon.paintIcon(c, g, x, y);
-        else {
-            g.drawString("Loading album cover, please wait...", x + 300, y + 190);
-            retrieveImageIconIfNotDoingIt(c, g, x, y);
-        }
-    }
-
-    private void retrieveImageIconIfNotDoingIt(Component c, Graphics g, int x, int y) {
-        if ( !isRetrievingImageIcon ) {
-            isRetrievingImageIcon = true;
-            new Thread(() -> {
-                try {
-                    setImageIcon(new ImageIcon(imageURL, "Album Cover"));
-                    c.repaint();
-                } catch (Exception e) {
-                    g.drawString("Errors occur, can not load album cover.", x + 300, y + 190);
-                    e.printStackTrace();
-                }
-            }).start();
-        }
+        currentState.paintIcon(c, g, x, y);
     }
 }
