@@ -1,6 +1,6 @@
 package com.example.patterns.observer.weatherstation.weatherdisplays;
 
-import com.example.patterns.observer.weatherstation.*;
+import com.example.patterns.observer.weatherstation.data.WeatherData;
 
 public class ForecastDisplay extends AbstractWeatherDisplay {
 	private float currentPressure = 29.92f;  

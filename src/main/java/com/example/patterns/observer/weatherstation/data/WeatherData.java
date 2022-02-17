@@ -1,6 +1,8 @@
-package com.example.patterns.observer.weatherstation;
+package com.example.patterns.observer.weatherstation.data;
 
 import java.util.*;
+
+import com.example.patterns.observer.weatherstation.weatherdisplays.Observer;
 
 public class WeatherData implements Subject {
     private float temperature;

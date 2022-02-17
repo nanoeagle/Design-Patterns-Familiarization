@@ -1,6 +1,6 @@
 package com.example.patterns.observer.weatherstation.weatherdisplays;
 
-import com.example.patterns.observer.weatherstation.*;
+import com.example.patterns.observer.weatherstation.data.WeatherData;
 
 public abstract class AbstractWeatherDisplay implements DisplayElement, Observer {
     WeatherData weatherData;

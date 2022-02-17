@@ -1,5 +1,6 @@
 package com.example.patterns.observer.weatherstation;
 
+import com.example.patterns.observer.weatherstation.data.WeatherData;
 import com.example.patterns.observer.weatherstation.weatherdisplays.*;
 
 public class WeatherStation {
