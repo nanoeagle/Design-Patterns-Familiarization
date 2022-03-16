@@ -13,8 +13,8 @@ public abstract class Pizza {
     PizzaIngredientFactory ingredientFactory;
     Dough dough;
     Sauce sauce;
-    Veggie veggies[];
     Cheese cheese;
+    Veggie veggies[];
     Pepperoni pepperoni;
     Clam clams;
     
@@ -31,6 +31,13 @@ public abstract class Pizza {
     }
 
     public abstract void prepare();
+
+    void prepareBasicsOfPizza() {
+        System.out.println("Preparing " + name);
+        dough = ingredientFactory.createDough();
+        sauce = ingredientFactory.createSauce();
+        cheese = ingredientFactory.createCheese();
+    }
     
     public void bake() {
         System.out.println("Bake for 25 minutes at 350");
@@ -53,7 +60,8 @@ public abstract class Pizza {
 		if (pepperoni != null) result += pepperoni + "\n";
 		if (clams != null) result += clams + "\n";
 		if (veggies != null) 
-            for (Veggie veggie : veggies) result += veggie + ", ";
+            for (int i = 0; i < veggies.length; i++) 
+                result += veggies[i] + ((i == veggies.length - 1) ? "." : ", ");
 		return result += "\n";
     }
 }
