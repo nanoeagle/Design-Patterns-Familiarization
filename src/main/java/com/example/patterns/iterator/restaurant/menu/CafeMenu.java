@@ -4,11 +4,9 @@ import java.util.*;
 
 public class CafeMenu implements DinnerMenu {
     private Map<String, MenuItem> menuItemMap;
-    private Collection<MenuItem> menuItems;
     
     public CafeMenu() {
         menuItemMap = new HashMap<String, MenuItem>();
-        menuItems = menuItemMap.values();
 
         addItem("Veggie Burger and Air Fries",
             "Veggie burger on a whole wheat bun, lettuce, tomato, and fries",
@@ -31,6 +29,6 @@ public class CafeMenu implements DinnerMenu {
 
     @Override
     public Iterator<MenuItem> iterator() {
-        return menuItems.iterator();
+        return menuItemMap.values().iterator();
     }
 }
