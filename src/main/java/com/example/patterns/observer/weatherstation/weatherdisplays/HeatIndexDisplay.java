@@ -3,7 +3,7 @@ package com.example.patterns.observer.weatherstation.weatherdisplays;
 import com.example.patterns.observer.weatherstation.data.WeatherData;
 
 public class HeatIndexDisplay extends AbstractWeatherDisplay {
-    float heatIndex = 0.0f;
+    private float heatIndex = 0.0f;
 
     public HeatIndexDisplay(WeatherData weatherData) {
         super(weatherData);

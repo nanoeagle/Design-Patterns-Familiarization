@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.example.patterns.observer.weatherstation.weatherdisplays.Observer;
 
-public class WeatherData implements Subject {
+public class WeatherData implements Observable {
     private float temperature;
     private float humidity;
     private float pressure;

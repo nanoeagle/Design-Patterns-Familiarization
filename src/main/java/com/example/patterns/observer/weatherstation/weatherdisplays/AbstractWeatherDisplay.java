@@ -13,5 +13,6 @@ public abstract class AbstractWeatherDisplay implements DisplayElement, Observer
     @Override
     public void unsubscribeFromSubject() {
         weatherData.remove(this);
+        weatherData = null;
     }
 }
