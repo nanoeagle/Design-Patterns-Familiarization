@@ -5,28 +5,30 @@ import java.awt.*;
 import javax.swing.*;
 
 import com.example.patterns.compound.dj.controllers.DJController;
+import com.example.patterns.compound.dj.models.Bpm;
 
-public class ControlsView extends DJGUI {
-    private JTextField bpmTextField = new JTextField(2);
+public class ControlsView {
+    private DJController djController;
     private JButton setBpmBtn;
     private JButton increaseBpmBtn;
     private JButton decreaseBpmBtn;
     private JMenuItem startMenuItem;
     private JMenuItem stopMenuItem;
+    private JTextField bpmTextField;
     
-    public ControlsView(DJController controller) {
-        super(controller);
+    public ControlsView(DJController djController) {
+        this.djController = djController;
         initButtons();
         createFrame();
     }
 
     private void initButtons() {
         setBpmBtn = new JButton("Set");
-        setBpmBtn.addActionListener(e -> controller.setBpm());
+        setBpmBtn.addActionListener(e -> djController.setBpm());
         increaseBpmBtn = new JButton(">>");
-        increaseBpmBtn.addActionListener(e -> controller.increaseBpm());
+        increaseBpmBtn.addActionListener(e -> djController.increaseBpm());
         decreaseBpmBtn = new JButton("<<");
-        decreaseBpmBtn.addActionListener(e -> controller.decreaseBpm());
+        decreaseBpmBtn.addActionListener(e -> djController.decreaseBpm());
     }
 
     private void createFrame() {
@@ -42,9 +44,9 @@ public class ControlsView extends DJGUI {
 
     private JMenuBar createMenuBar() {
         startMenuItem = new JMenuItem("Start");
-        startMenuItem.addActionListener(e -> controller.play());
+        startMenuItem.addActionListener(e -> djController.play());
         stopMenuItem = new JMenuItem("Stop");
-        stopMenuItem.addActionListener(e -> controller.stop());
+        stopMenuItem.addActionListener(e -> djController.stop());
         JMenuItem exit = new JMenuItem("Quit");
         exit.addActionListener(e -> System.exit(0));
 
@@ -69,6 +71,8 @@ public class ControlsView extends DJGUI {
     private JPanel createBpmInputPanel() {
         JLabel bpmInputLabel = new JLabel("Enter BPM:", SwingConstants.RIGHT);
         bpmInputLabel.setBorder(BorderFactory.createEmptyBorder(5 ,5 ,5 ,5));
+        bpmTextField = new JTextField(2);
+        
         JPanel enterPanel = new JPanel(new GridLayout(1, 2));
         enterPanel.add(bpmInputLabel);
         enterPanel.add(bpmTextField);
@@ -83,7 +87,7 @@ public class ControlsView extends DJGUI {
     }
 
     public int getBpmInputValue() {
-        int bpm = 90;
+        int bpm = Bpm.DEFAULT_VALUE;
         try { 
             int inputValue = Integer.parseInt(bpmTextField.getText());
             if (inputValue > 0) bpm = inputValue;

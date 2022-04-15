@@ -1,8 +1,7 @@
-package com.example.patterns.compound.ducksimulator.observable.quacker.factories;
+package com.example.patterns.compound.ducksimulator.observable.factories;
 
-import com.example.patterns.compound.ducksimulator.observable.quacker.*;
-import com.example.patterns.compound.ducksimulator.observable.quacker.ducks.*;
-import com.example.patterns.compound.ducksimulator.observable.quacker.nonducks.*;
+import com.example.patterns.compound.ducksimulator.observable.ducks.*;
+import com.example.patterns.compound.ducksimulator.observable.nonfowl.*;
 
 public class CountingQuackerFactory extends AbstractQuackerFactory {
     @Override
@@ -23,10 +22,5 @@ public class CountingQuackerFactory extends AbstractQuackerFactory {
     @Override
     public Quackable createRubberDuck() {
         return new QuackCounter(new RubberDuck());
-    }
-
-    @Override
-    public Quackable createGooseDuck() {
-        return new QuackCounter(new GooseAdapter(new Goose()));
     }
 }

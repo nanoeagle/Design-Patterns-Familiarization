@@ -4,6 +4,6 @@ import com.example.patterns.compound.ducksimulator.observer.Observer;
 
 /* Observer pattern. */
 public interface Observable {
-    void registerObserver(Observer observer);
+    void register(Observer observer);
     void notifyObservers();
 }

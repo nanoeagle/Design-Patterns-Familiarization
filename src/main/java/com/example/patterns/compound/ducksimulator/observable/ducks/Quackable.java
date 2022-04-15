@@ -1,4 +1,4 @@
-package com.example.patterns.compound.ducksimulator.observable.quacker;
+package com.example.patterns.compound.ducksimulator.observable.ducks;
 
 import com.example.patterns.compound.ducksimulator.observable.Observable;
 

@@ -2,28 +2,28 @@ package com.example.patterns.compound.dj.views;
 
 import javax.swing.*;
 
-public class BeatBar extends JProgressBar implements Runnable {
-    public static final int MAX_VALUE = 100;
+import com.example.patterns.compound.dj.models.Observable;
+
+class BeatBar extends JProgressBar implements Observer {
+    private static final int MAX_VALUE = 100;
 
     private static final long serialVersionUID = 2L;
 
     private boolean isOn;
 
-    public BeatBar() {
+    BeatBar() {
         setMinimum(0);
         setMaximum(MAX_VALUE);
     }
 
-    public void on() {
+    void on() {
         isOn = true;
-        Thread pulseThread = new Thread(this);
+        Thread pulseThread = new Thread(() -> { 
+            while (isOn) visualizePulse(); });
         pulseThread.start();
     }
 
-    @Override
-    public void run() { while (isOn) visualizePulse(); }
-
-    public void off() {
+    void off() {
         isOn = false;
         Thread resetThread = new Thread(() -> {
             while (getValue() != 0) visualizePulse(); });
@@ -40,5 +40,10 @@ public class BeatBar extends JProgressBar implements Runnable {
     private void makeIntervalBetweenPulses() {
         try { Thread.sleep(50); } 
         catch (Exception e) { e.printStackTrace(); };
+    }
+
+    @Override
+    public void update(Observable subject) {
+        setValue(MAX_VALUE);        
     }
 }

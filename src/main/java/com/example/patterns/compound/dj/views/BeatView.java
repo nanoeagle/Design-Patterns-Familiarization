@@ -3,21 +3,18 @@ package com.example.patterns.compound.dj.views;
 import java.awt.*;
 import javax.swing.*;
 
-import com.example.patterns.compound.dj.controllers.DJController;
-
-public class BeatView extends DJGUI {
+public class BeatView {
     private BeatBar beatBar;
-    private JLabel bpmOutputLabel;
+    private BpmOutputLabel bpmOutputLabel;
 
-    public BeatView(DJController controller) {
-        super(controller);
+    public BeatView() {
         beatBar = new BeatBar();
         initBpmOutputLabel();
         createFrame(createBpmPanel());
     }
 
     private void initBpmOutputLabel() {
-        bpmOutputLabel = new JLabel("offline", SwingConstants.CENTER);
+        bpmOutputLabel = new BpmOutputLabel("offline", SwingConstants.CENTER);
         bpmOutputLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
@@ -37,19 +34,20 @@ public class BeatView extends DJGUI {
         frame.setVisible(true);
     }
 
-    public void setBeatBarValue(int value) {
-        beatBar.setValue(value);
+    public Observer getBeatObserver() {
+        return beatBar;
     }
 
-    public void setBpmOutputLabelValue(String value) {
-        bpmOutputLabel.setText(value);
+    public Observer getBpmObserver() {
+        return bpmOutputLabel;
     }
 
-    public void turnOnBeatBar() {
+    public void turnOn() {
         beatBar.on();
     }
 
-    public void turnOffBeatBar() {
+    public void turnOff() {
         beatBar.off();
+        bpmOutputLabel.setText("offline");
     }
 }

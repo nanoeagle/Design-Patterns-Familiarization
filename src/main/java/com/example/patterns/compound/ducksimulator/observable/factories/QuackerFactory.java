@@ -1,8 +1,8 @@
-package com.example.patterns.compound.ducksimulator.observable.quacker.factories;
+package com.example.patterns.compound.ducksimulator.observable.factories;
 
-import com.example.patterns.compound.ducksimulator.observable.quacker.Quackable;
-import com.example.patterns.compound.ducksimulator.observable.quacker.ducks.*;
-import com.example.patterns.compound.ducksimulator.observable.quacker.nonducks.*;
+import com.example.patterns.compound.ducksimulator.observable.*;
+import com.example.patterns.compound.ducksimulator.observable.ducks.*;
+import com.example.patterns.compound.ducksimulator.observable.nonfowl.*;
 
 public class QuackerFactory extends AbstractQuackerFactory {
     @Override

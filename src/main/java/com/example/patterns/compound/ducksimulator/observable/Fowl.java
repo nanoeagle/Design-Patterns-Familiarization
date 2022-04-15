@@ -4,22 +4,20 @@ import java.util.*;
 
 import com.example.patterns.compound.ducksimulator.observer.Observer;
 
-public class ObservableImpl implements Observable {
-    private Observable observable;
+public class Fowl implements Observable {
     private List<Observer> observers;
 
-    public ObservableImpl(Observable observable) {
-        this.observable = observable;
+    public Fowl() {
         observers = new ArrayList<>();
     }
     
     @Override
-    public void registerObserver(Observer observer) {
+    public void register(Observer observer) {
         observers.add(observer);
     }
     
     @Override
     public void notifyObservers() {
-        for (Observer observer : observers) observer.update(observable);
+        for (Observer observer : observers) observer.update(this);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.patterns.compound.ducksimulator;
 
-import com.example.patterns.compound.ducksimulator.observable.quacker.*;
-import com.example.patterns.compound.ducksimulator.observable.quacker.factories.*;
+import com.example.patterns.compound.ducksimulator.observable.ducks.*;
+import com.example.patterns.compound.ducksimulator.observable.factories.*;
 import com.example.patterns.compound.ducksimulator.observer.Quackologist;
 
 class DuckSimulator {
@@ -9,12 +9,12 @@ class DuckSimulator {
         DuckSimulator simulator = new DuckSimulator();
         simulator.simulate(new CountingQuackerFactory());
     }
-        
+
     private void simulate(AbstractQuackerFactory quackerFactory) {
-        Flock flockOfQuackers = createFlockOfQuackers(quackerFactory);
-        Flock flockOfMallards = createFlockOfMallards(quackerFactory);
+        FlockOfQuackers flockOfQuackers = createFlockOfQuackers(quackerFactory);
+        FlockOfQuackers flockOfMallards = createFlockOfMallards(quackerFactory);
         flockOfQuackers.add(flockOfMallards);
-        flockOfQuackers.registerObserver(new Quackologist());
+        flockOfQuackers.register(new Quackologist());
 
         System.out.println("\nDuck Simulator: Whole Flock Simulation");
         flockOfQuackers.quack();
@@ -26,8 +26,8 @@ class DuckSimulator {
             + QuackCounter.getNumberOfQuacks() + " times");
     }
 
-    private Flock createFlockOfQuackers(AbstractQuackerFactory quackerFactory) {
-        Flock flockOfQuackers = new Flock();
+    private FlockOfQuackers createFlockOfQuackers(AbstractQuackerFactory quackerFactory) {
+        FlockOfQuackers flockOfQuackers = new FlockOfQuackers();
         flockOfQuackers.add(quackerFactory.createRedheadDuck());
         flockOfQuackers.add(quackerFactory.createDuckCall());
         flockOfQuackers.add(quackerFactory.createRubberDuck());
@@ -35,8 +35,8 @@ class DuckSimulator {
         return flockOfQuackers;
     }
 
-    private Flock createFlockOfMallards(AbstractQuackerFactory quackerFactory) {
-        Flock flockOfMallards = new Flock();
+    private FlockOfQuackers createFlockOfMallards(AbstractQuackerFactory quackerFactory) {
+        FlockOfQuackers flockOfMallards = new FlockOfQuackers();
         flockOfMallards.add(quackerFactory.createMallardDuck());
         flockOfMallards.add(quackerFactory.createMallardDuck());
         flockOfMallards.add(quackerFactory.createMallardDuck());

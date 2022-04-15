@@ -1,115 +1,77 @@
 package com.example.patterns.compound.dj.models;
 
-import java.io.File;
-import java.util.*;
+import com.example.patterns.compound.dj.views.Observer;
 
-import javax.sound.sampled.*;
-
-import com.example.patterns.compound.dj.observers.*;
-
-public class Beat implements Runnable, ObservableBeat {
-    private int bpm = 90;
+public class Beat implements Runnable, ObservableBeat {    
+    private Bpm bpm;
     private boolean play;
-    private BeatClip beatClip = new BeatClip();
-    private List<BpmObserver> bpmObservers = new ArrayList<>();
-    private List<BeatObserver> beatObservers = new ArrayList<>();
+    private BeatClip beatClip;
+    private Thread beatOnThread;
 
     public Beat() {
-        beatClip.initialize();
+        bpm = new Bpm();
+        beatClip = new BeatClip();
+        beatOnThread = new Thread(this);
     }
 
     @Override
-    public void setBpm(int bpm) {
-        this.bpm = bpm;
-        notifyBpmObservers();
+    public void setBpmValue(int value) {
+        bpm.setValue(value);
+        beatOnThread.interrupt();
     }
 
     @Override
-    public int getBpm() {
-        return bpm;
+    public int getBpmValue() {
+        return bpm.getValue();
     }
 
     @Override
     public void play() {
-        bpm = 90;
-        notifyBpmObservers();
+        bpm.setValue(Bpm.DEFAULT_VALUE);
         play = true;
-        Thread beatOnThread = new Thread(this);
         beatOnThread.start();
-    }
-
-    private void notifyBpmObservers() {
-        for (BpmObserver observer : bpmObservers) observer.updateBpm();
     }
 
     @Override
     public void run() {
         while (play) {
             beatClip.play();
-            notifyBeatObservers();
             makeIntervalBetweenBeats();
         }
-    }
-    
-    private void notifyBeatObservers() {
-        for (BeatObserver observer : beatObservers) observer.updateBeat();
     }
 
     private void makeIntervalBetweenBeats() {
         try { 
-            int interval = 60000 / bpm;
+            int interval = 60000 / bpm.getValue();
             Thread.sleep(interval); 
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) { 
+            System.err.println("beatOnThread: " + e.getMessage() + " - OK"); 
+        }
     }
 
     @Override
     public void stop() {
-        beatClip.stop();
         play = false;
+        beatClip.stop();
+    }
+    
+    @Override
+    public void registerBeatObserver(Observer obs) {
+        beatClip.register(obs);
     }
 
     @Override
-    public void register(BpmObserver observer) {
-        bpmObservers.add(observer);
+    public void registerBpmObserver(Observer obs) {
+        bpm.register(obs);        
     }
 
     @Override
-    public void register(BeatObserver observer) {
-        beatObservers.add(observer);
+    public void removeBeatObserver(Observer obs) {
+        beatClip.remove(obs);
     }
 
     @Override
-    public void remove(BpmObserver observer) {
-        bpmObservers.remove(observer);
-    }
-
-    @Override
-    public void remove(BeatObserver observer) {
-        beatObservers.remove(observer);
-    }
-
-    private final class BeatClip {
-        private Clip clip;
-
-        private void initialize() {
-            try {
-                File resource = new File("address in your file system/clap.wav");
-                clip = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
-                clip.open(AudioSystem.getAudioInputStream(resource));
-            } catch(Exception e) {
-                System.out.println("Error: Can't load clip");
-                e.printStackTrace();
-            }
-        }
-        
-        private void play() {
-            clip.setFramePosition(0);
-            clip.start();
-        }
-
-        private void stop() {
-            clip.setFramePosition(0);
-            clip.stop();
-        }
+    public void removeBpmObserver(Observer obs) {
+        bpm.remove(obs);   
     }
 }

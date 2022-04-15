@@ -1,10 +1,11 @@
-package com.example.patterns.compound.ducksimulator.observable.quacker;
+package com.example.patterns.compound.ducksimulator.observable.ducks;
 
 import com.example.patterns.compound.ducksimulator.observer.Observer;
 
 /* Decorator pattern. */
 public class QuackCounter implements Quackable {
     private static int numberOfQuacks;
+    
     private Quackable quacker;
     
     public QuackCounter (Quackable quacker) {
@@ -22,8 +23,8 @@ public class QuackCounter implements Quackable {
     }
 
     @Override
-    public void registerObserver(Observer observer) {
-        quacker.registerObserver(observer);
+    public void register(Observer observer) {
+        quacker.register(observer);
     }
 
     @Override

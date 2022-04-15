@@ -1,20 +1,19 @@
 package com.example.patterns.compound.dj.controllers;
 
 import com.example.patterns.compound.dj.models.ObservableBeat;
-import com.example.patterns.compound.dj.observers.*;
 import com.example.patterns.compound.dj.views.*;
 
-public class BeatController 
-implements DJController, BeatObserver, BpmObserver {
+public class BeatController implements DJController {
     private ObservableBeat beat;
     private BeatView beatView;
     private ControlsView controlsView;
    
     public BeatController(ObservableBeat beat) {
         this.beat = beat;
-        registerBeatObservers();
-        beatView = new BeatView(this);
+        beatView = new BeatView();
         controlsView = new ControlsView(this);
+        beat.registerBeatObserver(beatView.getBeatObserver());
+        beat.registerBpmObserver(beatView.getBpmObserver());
         setControlsViewComponentsWhenStop();
     }
     
@@ -26,21 +25,16 @@ implements DJController, BeatObserver, BpmObserver {
         controlsView.disableDecreaseBpmBtn();
     }
 
-    private void registerBeatObservers() {
-        beat.register((BeatObserver) this);
-        beat.register((BpmObserver) this);
-    }
-
     @Override
     public void setBpm() {
         int bpm = controlsView.getBpmInputValue();
-        beat.setBpm(bpm);
+        beat.setBpmValue(bpm);
     }
 
     @Override
     public void play() {
         beat.play();
-        beatView.turnOnBeatBar();
+        beatView.turnOn();
         setControlsViewComponentsWhenStart();
     }
   
@@ -55,30 +49,18 @@ implements DJController, BeatObserver, BpmObserver {
     @Override
     public void stop() {
         beat.stop();
-        beatView.turnOffBeatBar();
-        beatView.setBpmOutputLabelValue("offline");
+        beatView.turnOff();
         setControlsViewComponentsWhenStop();
     }
     
     @Override
-    public void increaseBpm() {
-        int currentBpm = beat.getBpm();
-        beat.setBpm(currentBpm + 1);
-    }
-    
-    @Override
-    public void decreaseBpm() {
-        int currentBpm = beat.getBpm();
-        beat.setBpm(currentBpm - 1);
-    }
+    public void increaseBpm() { incrementBpmBy(1); }
 
     @Override
-    public void updateBeat() {
-        beatView.setBeatBarValue(BeatBar.MAX_VALUE);
-    }
+    public void decreaseBpm() { incrementBpmBy(-1); }
 
-    @Override
-    public void updateBpm() {
-        beatView.setBpmOutputLabelValue("Current BPM: " + beat.getBpm());
+    private void incrementBpmBy(int i) {
+        int currentBpm = beat.getBpmValue();
+        beat.setBpmValue(currentBpm + i);
     }
 }

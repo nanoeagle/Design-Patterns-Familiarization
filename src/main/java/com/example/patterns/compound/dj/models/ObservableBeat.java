@@ -1,15 +1,15 @@
 package com.example.patterns.compound.dj.models;
 
-import com.example.patterns.compound.dj.observers.*;
+import com.example.patterns.compound.dj.views.Observer;
 
 public interface ObservableBeat {
-    void setBpm(int bpm);
-    int getBpm();
+    void setBpmValue(int bpm);
+    int getBpmValue();
     void play();
     void stop();
 
-    void register(BpmObserver observer);
-    void register(BeatObserver observer);
-    void remove(BpmObserver observer);
-    void remove(BeatObserver observer);
+    void registerBeatObserver(Observer obs);
+    void registerBpmObserver(Observer obs);
+    void removeBeatObserver(Observer obs);
+    void removeBpmObserver(Observer obs);
 }

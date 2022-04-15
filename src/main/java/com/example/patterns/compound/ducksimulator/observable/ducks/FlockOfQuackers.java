@@ -1,14 +1,14 @@
-package com.example.patterns.compound.ducksimulator.observable.quacker;
+package com.example.patterns.compound.ducksimulator.observable.ducks;
 
 import java.util.*;
 
 import com.example.patterns.compound.ducksimulator.observer.Observer;
 
 /* Composite pattern. */
-public class Flock implements Quackable {
+public class FlockOfQuackers implements Quackable {
     private List<Quackable> quackers;
     
-    public Flock() {
+    public FlockOfQuackers() {
         quackers = new ArrayList<>();
     }
     
@@ -23,8 +23,8 @@ public class Flock implements Quackable {
     }
 
     @Override
-    public void registerObserver(Observer observer) {
-        for (Quackable quacker : quackers) quacker.registerObserver(observer);
+    public void register(Observer observer) {
+        for (Quackable quacker : quackers) quacker.register(observer);
     }
 
     @Override
